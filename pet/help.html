@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Care Management System</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-image: url('h2.jpg'); 
+      background-size: cover; 
+      background-position: center; 
+      background-repeat: no-repeat; 
+    }
+    .chat-container {
+      max-width: 500px;
+      margin: 50px auto;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .chat-header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    .chat-body {
+      padding: 15px;
+      background-color: #fff;
+      max-height: 300px;
+      overflow-y: scroll;
+    }
+    .chat-input {
+      padding: 15px;
+      background-color: #f8f9fa;
+    }
+    .btn-send {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="chat-container">
+      <div class="chat-header">
+        <h4>Pet Care Management System</h4>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <p>Welcome to Pet Care Management System. How can I assist you with your pet care needs?</p>
+      </div>
+      <div class="chat-input">
+        <input type="text" class="form-control" id="user-input" placeholder="Type your message...">
+        <button class="btn btn-send mt-2" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      var userInput = document.getElementById("user-input").value;
+      var chatBody = document.getElementById("chat-body");
+      
+      var userMessage = "<p style='color: #007bff'>You: " + userInput + "</p>";
+      var botMessage = "<p style='color: #28a745'>Bot: " + getResponse(userInput) + "</p>";
+      
+      chatBody.innerHTML += userMessage + botMessage;
+      chatBody.scrollTop = chatBody.scrollHeight;
+      
+      document.getElementById("user-input").value = "";
+    }
+
+    function getResponse(userInput) {
+      if (userInput.includes("appointment")) {
+        return "Sure! Please provide your preferred date and time for the appointment.";
+      } else if (userInput.includes("vaccination")) {
+        return "Vaccinations are essential for your pet's health. When was the last vaccination?";
+      } else if (userInput.includes("food")) {
+        return "We offer a variety of high-quality pet foods. Do you have any specific dietary requirements for your pet?";
+      } else if (userInput.includes("fever")) {
+        return "If your pet has a fever, it's important to consult a veterinarian immediately for proper diagnosis and treatment.";
+      } else if (userInput.includes("feeling sickness")) {
+        return "If your pet is feeling sick, it's crucial to observe its symptoms closely and consider consulting a veterinarian as soon as possible.";
+      } else if(userInput.includes("Bark")) {
+        return " Dogs bark as a form of communication. It can signify various things such as excitement, alertness, playfulness, or as a warning signal.";
+      } else if(userInput.includes("Howl")) {
+        return " Howling is a long, mournful sound that dogs often make in response to certain triggers such as sirens, other dogs howling, or when they are lonely or anxious.";
+      }else if(userInput.includes("Meow")) {
+        return "Meowing is the most common sound that cats make. They use different types of meows to communicate various needs and emotions, such as hunger, greeting, seeking attention, or expressing discomfort.";
+      }
+      else {
+        return "I'm sorry, I couldn't understand that. How can I assist you further with your pet care needs?";
+      }
+    }
+  </script>
+</body>
+
+</html>

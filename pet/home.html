@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .login-container {
+      margin-top: 100px;
+      animation: slideInDown 0.5s forwards;
+    }
+    .login-card {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      animation: fadeIn 0.5s forwards;
+    }
+    .login-card h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group input {
+      border-radius: 20px;
+    }
+    .btn-login {
+      width: 100%;
+      border-radius: 20px;
+      background-color: #007bff;
+      color: #ffffff;
+    }
+    .btn-login:hover {
+      background-color: #0056b3;
+    }
+    /* Custom styles for the home page */
+    .home-page {
+      display: none; /* Initially hide the home page */
+      animation: fadeIn 0.5s forwards;
+    }
+    .jumbotron {
+      background-image: url('h1.jpg');
+      background-size: cover;
+      color: rgb(239, 8, 8);
+      text-align: center;
+      padding: 100px 20px;
+      margin-bottom: 0;
+      animation: slideInUp 0.5s forwards;
+    }
+    .card {
+      margin-bottom: 20px;
+      border: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+    .navbar {
+      background-color: #343a40;
+      animation: slideInDown 0.5s forwards;
+    }
+    .navbar-brand {
+      font-size: 24px;
+    }
+    .navbar-dark .navbar-nav .nav-link {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .navbar-dark .navbar-nav .nav-link:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .footer {
+      background-color: #343a40;
+      color: white;
+      animation: slideInUp 0.5s forwards;
+    }
+
+    /* Animations */
+    @keyframes slideInDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Form -->
+  <div class="container login-container">
+    <div class="card login-card">
+      <h2>Login</h2>
+      <form id="loginForm" onsubmit="login(event)">
+        <div class="form-group">
+          <input type="text" class="form-control" id="username" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" id="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-login">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Home Page Content -->
+  <div class="home-page"> <!-- This div contains the home page content -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Pet Care System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="form.html">Form</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html" onclick="showContact()">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="help.html">Help</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+      <h1 class="display-4">Welcome to Pet Care System</h1>
+      <p class="lead">Providing the best care for your pets</p>
+      <a class="btn btn-primary btn-lg" href="learnmore.html" role="button">Learn more</a>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <img src="h2.jpg" class="card-img-top" alt="Service 1">
+            <div class="card-body">
+              <h5 class="card-title">Pet Boarding</h5>
+              <p class="card-text">We provide comfortable boarding facilities for your pets.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img src="h3.jpg" class="card-img-top" alt="Service 2">
+            <div class="card-body">
+              <h5 class="card-title">Pet Grooming</h5>
+              <p class="card-text">Our professional groomers will keep your pets looking their best.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img src="h4.jpg" class="card-img-top" alt="Service 3">
+            <div class="card-body">
+              <h5 class="card-title">Veterinary Care</h5>
+              <p class="card-text">We offer comprehensive veterinary care for your pets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer text-center py-4">
+      <div class="container">
+        <p>&copy; 2024 Pet Care System</p>
+      </div>
+    </footer>
+
+    <!-- Contact Section -->
+    <div id="contact-section" style="display: none;">
+      <h2>Contact Us</h2>
+      <p>Email: contact@example.com</p>
+      <p>Phone: 123-456-7890</p>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS, jQuery, Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function login(event) {
+      event.preventDefault(); // Prevent form submission
+      // Here you can add code to handle login logic, such as sending data to a server
+      // For demonstration purposes, let's assume the login is successful
+      var homePage = document.querySelector('.home-page');
+      homePage.style.display = 'block'; // Show the home page
+      var loginContainer = document.querySelector('.login-container');
+      loginContainer.style.display = 'none'; // Hide the login form
+    }
+
+    function showContact() {
+      var contactSection = document.getElementById('contact-section');
+      contactSection.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

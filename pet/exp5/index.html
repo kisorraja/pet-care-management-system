@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html ng-app="feedbackApp">
+
+<head>
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('i1.jpg'); 
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); 
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-controller="FeedbackFormController" class="container">
+        <h2>Feedback Form</h2>
+        <form>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text"id="name" class="form-control" ng-model="feedback.name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" class="form-control" ng-model="feedback.email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="rating">Rating:</label>
+                <select id="rating" class="form-control" ng-model="feedback.rating" required>
+                    <option value="">Select</option>
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="3">3 - Good</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="1">1 - Poor</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea id="comment" class="form-control" ng-model="feedback.comment" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" ng-click="submitFeedback()">Submit</button>
+        </form>
+
+        <h2>Feedback Received</h2>
+        <ul>
+            <li ng-repeat="fb in feedbacks" class="mb-3 p-3 bg-light">
+                <strong>Name:</strong> {{fb.name}}<br>
+                <strong>Email:</strong> {{fb.email}}<br>
+                <strong>Rating:</strong> {{fb.rating}}<br>
+                <strong>Comment:</strong> {{fb.comment}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var app = angular.module('feedbackApp', []);
+
+        app.controller('FeedbackFormController', function($scope) {
+            $scope.feedbacks = [];
+
+            $scope.submitFeedback = function() {
+                $scope.feedbacks.push({
+                    name: $scope.feedback.name,
+                    email: $scope.feedback.email,
+                    rating: $scope.feedback.rating,
+                    comment: $scope.feedback.comment
+                });
+                $scope.feedback = {};
+            };
+        });
+    </script>
+</body>
+
+</html>

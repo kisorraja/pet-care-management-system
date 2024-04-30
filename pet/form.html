@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pet Care Management System</title>
+<style>
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-image: url('l1.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+margin: 0;
+padding: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+h1 {
+color: #333;
+}
+form {
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+margin-bottom: 20px;
+}
+label {
+display: block;
+margin-bottom: 8px;
+}
+input, button {
+padding: 10px;
+margin-bottom: 12px;
+width: 100%;
+box-sizing: border-box;
+}
+button {
+background-color: #4CAF50;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+button:hover {
+background-color: #45a049;
+}
+#petList {
+list-style-type: none;
+padding: 0;
+width: 100%;
+}
+.pet-item {
+border: 1px solid #ddd;
+margin-bottom: 10px;
+padding: 15px;
+background-color: #fff;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+</style>
+</head>
+<body>
+<h1>Pet Care Management System</h1>
+<form id="addPetForm">
+<label for="petName">Pet Name:</label>
+<input type="text" id="petName" required>
+<label for="petType">Pet Type:</label>
+<input type="text" id="petType" required>
+<label for="petAge">Pet Age:</label>
+<input type="number" id="petAge" required>
+<label for="petBreed">Pet Breed:</label>
+<input type="text" id="petBreed" required>
+<label for="diseases">Diseases/Symptoms:</label> 
+<input type="text" id="diseases"> 
+<label for="daysAffected">Days Affected:</label>
+<input type="number" id="daysAffected">
+<label for="appointment">Appointment:</label>
+<input type="text" id="appointment">
+<label>
+<input type="checkbox" id="vaccinated"> Vaccinated
+</label>
+<button type="button" id="addPetBtn">Add Pet</button>
+</form>
+<ul id="petList"></ul>
+<script>
+document.addEventListener("DOMContentLoaded", function (){
+    var pets=[];
+    
+    function renderPetList(){
+        var petList = document.getElementById('petList');
+        petList.innerHTML = '';
+        pets.forEach(function (pet) {
+            var listItem=document.createElement('li');
+            listItem.classList.add('pet-item');
+            listItem.innerHTML = `
+                <strong>Name:</strong> ${pet.name}<br>
+                <strong>Type:</strong> ${pet.type}<br>
+                <strong>Age:</strong> ${pet.age}<br>
+                <strong>Breed:</strong> ${pet.breed}<br>
+                <strong>Diseases/Symptoms:</strong> ${pet.diseases || 'N/A'}<br> <!-- Display diseases/symptoms -->
+                <strong>Days Affected:</strong> ${pet.daysAffected || 'N/A'}<br>
+                <strong>Appointment:</strong> ${pet.appointment || 'N/A'}<br>
+                <strong>Vaccinated:</strong> ${pet.vaccinated ? 'Yes' : 'No'}
+            `;
+            petList.appendChild(listItem);
+        });
+    }
+
+    document.getElementById('addPetBtn').addEventListener('click', function () {
+        var petName=document.getElementById('petName').value;
+        var petType=document.getElementById('petType').value;
+        var petAge=document.getElementById('petAge').value;
+        var petBreed=document.getElementById('petBreed').value;
+        var diseases=document.getElementById('diseases').value; // Fetch diseases/symptoms value
+        var daysAffected=document.getElementById('daysAffected').value;
+        var appointment=document.getElementById('appointment').value;
+        var vaccinated=document.getElementById('vaccinated').checked;
+        
+        // Ajax request to process.php to handle form submission
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "process.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    window.location.href = "success.php?" + xhr.responseText; 
+                } else {
+                    alert("Error adding pet. Please try again."); 
+                }
+            }
+        };
+        // Send form data to process.php
+        xhr.send("petName=" + encodeURIComponent(petName) + "&petType=" + encodeURIComponent(petType) + "&petAge=" + encodeURIComponent(petAge) + "&petBreed=" + encodeURIComponent(petBreed) + "&diseases=" + encodeURIComponent(diseases) + "&daysAffected=" + encodeURIComponent(daysAffected) + "&appointment=" + encodeURIComponent(appointment) + "&vaccinated=" + encodeURIComponent(vaccinated));
+    });
+});
+</script>
+</body>
+</html>
